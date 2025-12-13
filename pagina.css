@@ -1,0 +1,41 @@
+body{
+   background-image: url(assets/fundo.jpeg);
+   background-size: cover;
+}
+.caixa{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+.caixa > button{
+    font-size: 30px;
+    width: 250px;
+    height: 80px;
+    background-color: white;
+    border: 2px solid cyan;
+    border-radius: 20%;
+    cursor: pointer;
+}
+
+.caixa > h1{
+  font-family: Verdana;
+  color: var(--white);
+  animation: color 5s alternate infinite, up 1s alternate infinite;
+}
+
+.caixa > button:hover {
+   /* some o fundo */
+    transform: translateY(-4px); /* levita pra cima */
+    background: rgba(255, 255, 255, 0.3);
+    
+}
+
+@keyframes color{
+    from{color: #fff;}
+    to{color:#0ff;}
+}
+
+@keyframes up{
+    from{transform: translateY(0);}
+    to{transform: translateY(-10px);}
+}
