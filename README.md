@@ -1,7 +1,8 @@
 # Quiz Corporativo – BYD
 
-Projeto desenvolvido para a disciplina Desenvolvimento de Aplicações para Internet
-Curso: Análise e Desenvolvimento de Sistemas – UNINASSAU
+Projeto desenvolvido para a disciplina **Desenvolvimento de Aplicações para Internet**
+
+Curso: **Análise e Desenvolvimento de Sistemas – UNINASSAU**
 
 ## Objetivo
 Criar um quiz temático sobre a empresa BYD (Build Your Dreams), usando apenas HTML5, CSS3 e JavaScript, funcionando 100% offline.
@@ -24,6 +25,8 @@ Criar um quiz temático sobre a empresa BYD (Build Your Dreams), usando apenas H
 - Imagem de fundo diferente em cada questão (pasta imagens/)
 
 ## Estrutura de pastas
+
+```
 projeto-quiz-byd/
 ├── index.html
 ├── quiz.html
@@ -45,6 +48,7 @@ projeto-quiz-byd/
 │ ├── fundo9.jpg
 │ └── fundo10.jpg
 └── README.md
+```
 
 ## Código-base e modificações do grupo
 O projeto partiu de um código-base disponibilizado pelo professor.
