@@ -12,7 +12,7 @@ let contador;
 let erros = [];
 
 
-// QUESTÕES BYD
+// Questões sobre a BYD
 
 const quiz = [
   {
@@ -236,6 +236,7 @@ function mostrarResultado() {
     ${listaErros}
   `;
 }
+
 
 
 iniciarPergunta();
