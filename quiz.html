@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QUIZ BYD</title>
-
-  <link rel="stylesheet" href="quiz.css">
-  <link rel="icon" href="assets/icon.png" type="image">
+  <!--
+    Arquivo: quiz.html
+    Responsável: Gabriel Cristovão
+    Objetivo: Estrutura da interface do quiz (timer, pergunta, alternativas e área de resultado).
+    Observação: A lógica está separada em js/quiz.js.
+  -->
+  <meta charset="UTF-8"> <!-- Define a codificação de caracteres -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
+  <title>QUIZ BYD</title> <!-- Título da página -->
+  <link rel="stylesheet" href="css/quiz.css"> <!-- Link para o arquivo CSS externo -->  
+  <link rel="icon" href="imagens/icon.png" type="image"> <!-- Ícone da aba do navegador -->
 </head>
-<body>
 
-  <div id="quiz-container">
-    <div id="timer">Tempo: <span id="time-left"></span>s</div>
-    <div class="question" id="question-text"></div>
-    <div class="options" id="options"></div>
-    <div id="result"></div>
+<body>
+  
+  <div id="quiz-container"> <!-- Conteiner principal do quiz -->
+    
+    <div id="timer">Tempo: <span id="time-left"></span>s</div> <!-- Temporizador da pergunta atual -->
+    
+    <div class="question" id="question-text"></div> <!-- Área para exibição da pergunta -->
+    
+    <div class="options" id="options"></div> <!-- Conteiner para as alternativas -->
+    
+    <div id="result"></div> <!-- Área para exibição do resultado final do quiz -->
   </div>
 
-  <script src="quiz.js"></script>
+  <!-- JavaScript do quiz (lógica separada em arquivo externo) -->
+  <script src="js/quiz.js"></script>
 </body>
 </html>

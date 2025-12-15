@@ -1,0 +1,60 @@
+/*
+  Arquivo: quiz.css
+  Responsável: Yure Gabriel
+  Objetivo: Estilizar a página do quiz, garantindo legibilidade sobre fundos diferentes.
+  Observação: Usa overlay para melhorar contraste do texto com a imagem de fundo.
+*/
+
+body {
+  font-family: Arial, sans-serif; /* Fonte padrão */
+  padding: 20px; /* Espaçamento interno */
+  margin: 0; /* Remove margens padrão */
+  min-height: 100vh; /* Altura mínima da viewport */
+  position: relative; /* Para posicionar o overlay */
+}
+
+/* Overlay para contraste */
+body::before { /* Pseudo-elemento para o overlay */
+  content: ""; /* Necessário para exibir o pseudo-elemento */
+  position: fixed; /* Fixa o overlay na tela */
+  inset: 0; /* Cobre toda a tela */
+  background: rgba(0, 0, 0, 0.45); /* Fundo preto semi-transparente */
+  z-index: 0; /* Fica atrás do conteúdo */
+  pointer-events: none; /* Permite interação com o conteúdo */
+}
+
+/* Container acima do overlay */
+#quiz-container { /* Container principal do quiz */
+  max-width: 600px; /* Largura máxima */
+  margin: auto; /* Centraliza horizontalmente */
+  background: #fff; /* Fundo branco para legibilidade */
+  padding: 20px; /* Espaçamento interno */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra suave */
+  position: relative; /* Para ficar acima do overlay */
+  z-index: 1; /* Garante que fique acima do overlay */
+}
+
+/* Texto da pergunta */
+.question { /* Classe para a pergunta */
+  font-size: 20px; /* Tamanho da fonte */
+  margin-bottom: 15px; /* Espaçamento abaixo da pergunta */
+}
+
+/* Botões das alternativas */
+.options button { /* Botões dentro da classe .options */
+  width: 100%; /* Largura total */
+  text-align: left; /* Alinha o texto à esquerda */
+  padding: 10px; /* Espaçamento interno */
+  margin: 5px 0; /* Espaçamento entre botões */
+  border: 1px solid #ccc; /* Borda cinza clara */
+  background: #eee; /* Fundo cinza claro */
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: pointer; /* Cursor de mãozinha */
+}
+
+/* Temporizador */
+#timer { /* ID do temporizador */
+  font-weight: bold; /* Negrito */
+  margin-bottom: 10px; /* Espaçamento abaixo do temporizador */
+}

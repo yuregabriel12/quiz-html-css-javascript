@@ -1,0 +1,62 @@
+/*
+  Arquivo: index.css
+  Responsável: Yure Gabriel
+  Objetivo: Estilo da página inicial (fundo, título e botão).
+*/
+
+body {  
+  background-image: url("../imagens/fundo.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; /* 👈 não repetir */
+  background-attachment: fixed; /* opcional: deixa mais bonito ao rolar */
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Mantém como estava: elementos em coluna e centralizados entre si */
+.caixa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Botão grande como antes */
+.caixa > button {
+  font-size: 30px;
+  width: 250px;
+  height: 80px;
+  background-color: white;
+
+  /* Seu antigo estava inválido: border: 100px cyan; */
+  border: 2px solid cyan;
+
+  border-radius: 20%;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Título com animações (sem var(--white) pra não depender de variável) */
+.caixa > h1 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #fff;
+  animation: color 5s alternate infinite, up 1s alternate infinite;
+  text-align: center;
+}
+
+/* Hover do botão como antes */
+.caixa > button:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Animações */
+@keyframes color {
+  from { color: #fff; }
+  to { color: #0ff; }
+}
+
+@keyframes up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}

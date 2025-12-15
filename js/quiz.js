@@ -1,20 +1,37 @@
-// CONFIGURAÇÃO
+/*
+  Arquivo: quiz.js
+  Responsável: Emanuelly Vieira
+  Objetivo: Controlar a lógica do quiz (perguntas, timer, pontuação e resultado final).
 
+  Requisitos atendidos:
+  - 10 questões com 5 alternativas
+  - temporizador configurável e avanço automático ao expirar
+  - imagem de fundo diferente por questão (pasta imagens/)
+  - resultado final com lista de questões erradas e resposta correta
+*/
+
+// Tempo configurável por pergunta (em segundos)
 const tempoPorPergunta = 10;
 
-let indice = 0;
-let pontuacao = 0;
-let tempo;
-let contador;
+// Estado do quiz
+let indice = 0; // índice da questão atual
+let pontuacao = 0; // pontuação total
+let tempo; // tempo restante na questão atual
+let contador; // referência do temporizador
 
-// Array para guardar as perguntas erradas
-
+// Armazena questões erradas para exibir no resultado final
 let erros = [];
 
+/*
+  Cada questão possui:
+  - pergunta: texto da pergunta
+  - alternativas: 5 opções de resposta
+  - correta: índice da alternativa correta (0 a 4)
+  - pontos: pontuação da questão
+  - imagem: caminho local da imagem de fundo
+*/
 
-// Questões sobre a BYD
-
-const quiz = [
+const quiz = [ /* Array de questões */
   {
     pergunta: "O que significa a sigla BYD?",
     alternativas: [
@@ -24,23 +41,23 @@ const quiz = [
       "Build Your Design",
       "Boost Your Dreams"
     ],
-    correta: 1,
+    correta: 1, 
     pontos: 10,
-    imagem: "assets/fundo1.jpg"
+    imagem: "../imagens/fundo1.jpg" 
   },
   {
     pergunta: "Em que país a BYD foi fundada?",
     alternativas: ["Japão", "Coreia do Sul", "EUA", "China", "Alemanha"],
     correta: 3,
     pontos: 10,
-    imagem: "assets/fundo2.jpg"
+    imagem: "../imagens/fundo2.jpg"
   },
   {
     pergunta: "Em que ano a BYD foi fundada?",
     alternativas: ["1988", "1995", "2001", "2003", "2010"],
     correta: 1,
     pontos: 10,
-    imagem: "assets/fundo3.jpg"
+    imagem: "../imagens/fundo3.jpg"
   },
   {
     pergunta: "Qual foi o primeiro produto fabricado pela BYD?",
@@ -53,7 +70,7 @@ const quiz = [
     ],
     correta: 2,
     pontos: 10,
-    imagem: "assets/fundo4.jpg"
+    imagem: "../imagens/fundo4.jpg"
   },
   {
     pergunta: "Qual bateria tornou a BYD referência em segurança?",
@@ -66,7 +83,7 @@ const quiz = [
     ],
     correta: 1,
     pontos: 10,
-    imagem: "assets/fundo5.jpg"
+    imagem: "../imagens/fundo5.jpg"
   },
   {
     pergunta: "Qual tecnologia a Blade Battery utiliza?",
@@ -79,7 +96,7 @@ const quiz = [
     ],
     correta: 2,
     pontos: 10,
-    imagem: "assets/fundo6.jpg"
+    imagem: "../imagens/fundo6.jpg"
   },
   {
     pergunta: "Qual modelo da BYD é um SUV elétrico?",
@@ -92,7 +109,7 @@ const quiz = [
     ],
     correta: 3,
     pontos: 10,
-    imagem: "assets/fundo7.jpg"
+    imagem: "../imagens/fundo7.jpg"
   },
   {
     pergunta: "Qual fator ajudou a BYD a reduzir custos?",
@@ -105,7 +122,7 @@ const quiz = [
     ],
     correta: 2,
     pontos: 10,
-    imagem: "assets/fundo8.jpg"
+    imagem: "../imagens/fundo8.jpg"
   },
   {
     pergunta: "Qual investidor famoso possui participação na BYD?",
@@ -118,7 +135,7 @@ const quiz = [
     ],
     correta: 2,
     pontos: 10,
-    imagem: "assets/fundo9.jpg"
+    imagem: "../imagens/fundo9.jpg"
   },
   {
     pergunta: "Um dos desafios da BYD é:",
@@ -131,28 +148,33 @@ const quiz = [
     ],
     correta: 2,
     pontos: 10,
-    imagem: "assets/fundo10.jpg"
+    imagem: "../imagens/fundo10.jpg"
   }
 ];
 
+/**
+ * Mostra a pergunta atual, cria os botões das alternativas e inicia o temporizador.
+ * @returns {void}
+*/
 
-// INICIAR PERGUNTA
-
-function iniciarPergunta() {
+function iniciarPergunta() { 
   if (indice >= quiz.length) {
     mostrarResultado();
     return;
   }
 
-  const q = quiz[indice];
+  const q = quiz[indice]; 
 
-  document.body.style.backgroundImage = `url('${q.imagem}')`;
-  document.body.style.backgroundSize = "cover";
-  document.body.style.backgroundPosition = "center";
+  // Define a imagem de fundo da questão atual (pasta imagens/)
+  document.body.style.backgroundImage = `url('${q.imagem}')`; // Ajuste do caminho
+  document.body.style.backgroundSize = "cover"; // Ajusta o tamanho da imagem
+  document.body.style.backgroundPosition = "center"; // Centraliza a imagem
+  document.body.style.backgroundRepeat = "no-repeat"; // Não repete a imagem
 
-  document.getElementById("question-text").textContent =
-    `(${indice + 1}) ${q.pergunta}`;
+  // Atualiza texto da pergunta
+  document.getElementById("question-text").textContent = `(${indice + 1}) ${q.pergunta}`;
 
+  // Cria os botões de alternativas
   const opcoesDiv = document.getElementById("options");
   opcoesDiv.innerHTML = "";
 
@@ -163,40 +185,55 @@ function iniciarPergunta() {
     opcoesDiv.appendChild(btn);
   });
 
+  // Reinicia o tempo da pergunta
   tempo = tempoPorPergunta;
   document.getElementById("time-left").textContent = tempo;
+
   iniciarTimer();
 }
 
+/**
+ * Controla o temporizador. Quando chega a 0, avança automaticamente e registra como erro.
+ * @returns {void}
+*/
 
-// TIMER (Não avançando a pergunta automaticamente)
-
-function iniciarTimer() {
+function iniciarTimer() { 
   clearInterval(contador);
+
   contador = setInterval(() => {
     tempo--;
     document.getElementById("time-left").textContent = tempo;
 
     if (tempo <= 0) {
       clearInterval(contador);
-      document.getElementById("time-left").textContent = "0";
-      // trava a pergunta aguardando resposta
+
+      // Tempo esgotado conta como erro
+      const q = quiz[indice];
+      erros.push({
+        pergunta: q.pergunta,
+        respostaCorreta: q.alternativas[q.correta]
+      });
+
+      indice++;
+      iniciarPergunta();
     }
-  }, 1000);
+  }, 1000); // Atualiza a cada segundo
 }
 
-
-// RESPONDER
+/**
+ * Processa a resposta do usuário.
+ * @param {number} i índice da alternativa escolhida (0 a 4).
+ * @returns {void}
+*/
 
 function responder(i) {
   clearInterval(contador);
+
   const q = quiz[indice];
 
   if (i === q.correta) {
     pontuacao += q.pontos;
   } else {
-    
-    // guarda a pergunta errada
     erros.push({
       pergunta: q.pergunta,
       respostaCorreta: q.alternativas[q.correta]
@@ -207,8 +244,10 @@ function responder(i) {
   iniciarPergunta();
 }
 
-
-// RESULTADO FINAL
+/**
+ * Exibe o resultado final (pontuação e lista de erros).
+ * @returns {void}
+*/
 
 function mostrarResultado() {
   let listaErros = "";
@@ -225,7 +264,7 @@ function mostrarResultado() {
     });
     listaErros += "</ul>";
   } else {
-    listaErros = "<p>Parabéns! Você não errou nenhuma questão 🎉</p>";
+    listaErros = "<p>Você não errou nenhuma questão.</p>";
   }
 
   document.getElementById("quiz-container").innerHTML = `
@@ -237,6 +276,5 @@ function mostrarResultado() {
   `;
 }
 
-
-
+// Inicia o quiz ao abrir a página
 iniciarPergunta();
